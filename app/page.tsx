@@ -1,8 +1,9 @@
+import Servicios from "./Servicio"
+
 export default function Home() {
   return (
-    <main className="min-h-screen bg-black text-white flex flex-col items-center justify-center">
-      <h1 className="text-5xl font-bold">Barbería</h1>
-      <p className="text-gray-400 mt-4">El mejor corte de tu vida</p>
-    </main>
+    <div>
+      <Servicios />
+    </div>
   )
 }
