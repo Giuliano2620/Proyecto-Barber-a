@@ -1,24 +1,17 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import Servicios from "./Servicio"
+import Servicios from "./Servicios"
 import Barberos from "./Barberos"
 
 export default function Home() {
-  const [barberos, setBarberos] = useState<string[]>([])
-
-  useEffect(() => {
-    setBarberos(["Juan", "Giuliano", "Juancho"])
-  }, [])
-
   return (
-    <div>
-      <h1>Baez Zone</h1>
-      {barberos.map((barbero) => (
-        <p key={barbero}>{barbero}</p>
-      ))}
+    <main className="min-h-screen bg-gray-950 text-white p-8">
+      <h1 className="text-4xl font-bold text-center mb-8">
+        Barbería Don Juan
+      </h1>
       <Servicios />
       <Barberos />
-    </div>
+    </main>
   )
 }
