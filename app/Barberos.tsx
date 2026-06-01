@@ -1,13 +1,15 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 export default function Barberos() {
-  const [barberos, setBarberos] = useState([
-    { nombre: "Juan", disponible: true },
-    { nombre: "Pedro", disponible: false },
-    { nombre: "Carlos", disponible: true },
-  ])
+  const [barberos, setBarberos] = useState<any[]>([])
+
+  useEffect(() => {
+    fetch("http://localhost:3001/barberos")
+      .then(res => res.json())
+      .then(data => setBarberos(data))
+  }, [])
 
   const cambiarDisponibilidad = (nombre: string) => {
     setBarberos(barberos.map((barbero) => {
@@ -19,19 +21,19 @@ export default function Barberos() {
   }
 
   return (
-    <div className="bg-gray-900 rounded-x1 p-6">
-      <h2 className="text-2x1 font-bold mb-4">Barberos</h2>
+    <div className="bg-gray-900 rounded-xl p-6">
+      <h2 className="text-2xl font-bold mb-4">Barberos</h2>
       {barberos.map((barbero) => (
         <div key={barbero.nombre} className="flex justify-between items-center mb-3">
           <p className="text-lg">
-            {barbero.nombre} -{" "}
+            {barbero.nombre} —{" "}
             <span className={barbero.disponible ? "text-green-400" : "text-red-400"}>
               {barbero.disponible ? "Disponible" : "Ocupado"}
-              </span>
+            </span>
           </p>
           <button
-          onClick={() => cambiarDisponibilidad(barbero.nombre)}
-          className="bg-white text-black px-4 py-2 rounded-lg font-bold hover:bg-gray-200"
+            onClick={() => cambiarDisponibilidad(barbero.nombre)}
+            className="bg-white text-black px-4 py-2 rounded-lg font-bold hover:bg-gray-200"
           >
             {barbero.disponible ? "Marcar ocupado" : "Marcar disponible"}
           </button>
